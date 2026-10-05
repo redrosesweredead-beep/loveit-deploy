@@ -362,6 +362,8 @@ p { margin: 0 0 1rem; }
 .footer__socials a:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
 .footer__bottom { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.82rem; color: #8fb0ba; }
 .footer__legal { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
+.footer .btn--ghost { margin-top: 18px; color: var(--gold); border-color: var(--gold); }
+.footer .btn--ghost:hover { color: #fff; background: var(--gold); border-color: var(--gold); }
 
 /* ── Floating actions (mobile) ────────────────────────────────────────────── */
 .fab { position: fixed; right: 20px; bottom: 20px; z-index: 90; display: flex; flex-direction: column; gap: 12px; }
@@ -487,6 +489,12 @@ p { margin: 0 0 1rem; }
   .slider:has(.slide__img--mobile) { aspect-ratio: 1080 / 1500; }
   .slide__img--desktop { display: none; }
   .slide__img--mobile { display: block; }
+  /* На телефоне текст слайда — внизу, чтобы не перекрывать пару; затемнение снизу. */
+  .slide:has(.slide__img--mobile) { align-items: flex-end; }
+  .slide:has(.slide__img--mobile) .slide__content { padding-bottom: 30px; }
+  .slide:has(.slide__img--mobile) .slide__overlay {
+    background: linear-gradient(180deg, rgba(43,43,43,0.10) 0%, rgba(43,43,43,0.06) 38%, rgba(43,43,43,0.55) 74%, rgba(43,43,43,0.90) 100%);
+  }
 }
 
 /* Широкий, «дорогой» верхний бар */
