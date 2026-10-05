@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { getSettings, getNavigation } from "@/lib/settings";
-import { getCategories } from "@/lib/content";
+import { getCategories, getHeaderPages } from "@/lib/content";
 import { IconTelegram, IconWhatsApp, IconInstagram } from "./Icons";
 import LeadButton from "./LeadButton";
 import { JsonLd, localBusinessJsonLd } from "@/lib/seo";
 
 export default async function Footer() {
-  const [s, , categories] = await Promise.all([getSettings(), getNavigation(), getCategories()]);
+  const [s, , categories, headerPages] = await Promise.all([getSettings(), getNavigation(), getCategories(), getHeaderPages()]);
+  const privUrl = headerPages.find((p) => /привилег/i.test(p.label))?.url || "/o-nas";
   const req = s.requisites;
   const hasReq = req.legalName || req.inn || req.ogrnip;
   const mapQuery = encodeURIComponent(s.address);
@@ -39,12 +40,14 @@ export default async function Footer() {
               <Link href="/o-nas">О нас</Link>
               <Link href="/komanda">Команда</Link>
               <Link href="/kak-rabotaem">Как мы работаем</Link>
-              <Link href="/o-nas#privilegii">Привилегии</Link>
+              <Link href={privUrl}>Привилегии</Link>
+              <Link href="/portfolio">Портфолио</Link>
               <Link href="/ceny">Цены / Прайс-лист</Link>
               <Link href="/kalkulyator">Калькулятор</Link>
               <Link href="/kalendar">Свободные даты</Link>
               <Link href="/blog">Блог</Link>
               <Link href="/faq">FAQ</Link>
+              <Link href="/kontakty">Контакты</Link>
               <Link href="/karta-sayta">Карта сайта</Link>
             </div>
           </div>
@@ -57,7 +60,6 @@ export default async function Footer() {
               ))}
               <Link href="/uslugi">Все услуги</Link>
               <Link href="/ploshchadki">Площадки</Link>
-              <Link href="/portfolio">Портфолио</Link>
             </div>
           </div>
 
